@@ -1,5 +1,5 @@
 import { $, displayInputError, removeInputError, handleEmailError } from "../utils.js";
-import { REG_EXP, API } from "../constants.js";
+import { REG_EXP, API_URL } from "../constants.js";
 
 // 페이지 접근 시 엑세스토큰 보유 -> folder페이지로 이동
 if(localStorage.getItem("accessToken")) {
@@ -40,7 +40,7 @@ async function handleSignUp(event) {
 
   try {
     if(!emailError && !passwordError){
-      const response = await fetch(`${API}/sign-up`, {
+      const response = await fetch(`${API_URL}/sign-up`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ async function handleSignUp(event) {
       const responseData = await response.json();
 
       if(response.status === 200){
-        localStorage.setItem("accessToken", responseData.accessToken);
+        localStorage.setItem("accessToken", responseData.data.accessToken);
         alert("회원가입 되었습니다.");
         return location.href = "folder.html";
       }

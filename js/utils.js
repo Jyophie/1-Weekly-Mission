@@ -1,4 +1,4 @@
-import { REG_EXP, API } from "./constants.js";
+import { REG_EXP, API_URL } from "./constants.js";
 
 // 요소 하나 선택 함수
 function $(selector) {
@@ -111,7 +111,7 @@ async function checkEmailDBValid(e) {
   const emailInput = $("#email");
   
   try {
-    const response = await fetch(`${API}/check-email`, {
+    const response = await fetch(`${API_URL}/check-email`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

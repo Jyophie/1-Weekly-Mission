@@ -1,5 +1,5 @@
 import { $, displayInputError, removeInputError } from "../utils.js";
-import { API } from "../constants.js";
+import { API_URL } from "../constants.js";
 
 // 페이지 접근 시 엑세스토큰 보유 -> folder페이지로 이동
 if(localStorage.getItem("accessToken")) {
@@ -50,7 +50,7 @@ async function handleSignIn(event) {
   const passwordInput = elements['password'];
 
   try {
-    const response = await fetch(`${API}/sign-in`, {
+    const response = await fetch(`${API_URL}/sign-in`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ async function handleSignIn(event) {
     const responseData = await response.json();
 
     if(response.status === 200){
-      localStorage.setItem("accessToken", responseData.accessToken);
+      localStorage.setItem("accessToken", responseData.data.accessToken);
       alert("로그인 되었습니다.");
       return location.href = "folder.html";
     }
